@@ -1,0 +1,5 @@
+export PDK_ROOT=~/projects/asic/pdk
+export PDK=gf180mcuD
+export PDKPATH=$PDK_ROOT/$PDK
+alias magic-gf180mcuD="magic -d OGL -rcfile \"$PDKPATH/libs.tech/magic/$PDK.magicrc\""
+alias xschem-gf180mcuD="xschem --rcfile $PDKPATH/libs.tech/xschem/xschemrc --tcl 'set terminal xterm' --tcl 'set editor {xterm -e vim}'"
