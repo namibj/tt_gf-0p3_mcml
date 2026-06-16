@@ -176,8 +176,8 @@ m=1}
 C {ipin.sym} -780 -630 0 0 {name=p2 sig_type=std_logic lab=VDD}
 C {symbols/nfet_03v3.sym} 360 -140 0 0 {name=M6
 L=0.28u
-W="'vco_fwd_w'"
-nf="'vco_fwd_fingers'"
+W="'vco_fwd_w * vco_takeoff_ratio'"
+nf="'vco_takeoff_fingers'"
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
@@ -190,8 +190,8 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} 760 -140.0168316575716 0 1 {name=M7
 L=0.28u
-W="'vco_fwd_w'"
-nf="'vco_fwd_fingers'"
+W="'vco_fwd_w * vco_takeoff_ratio'"
+nf="'vco_takeoff_fingers'"
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
