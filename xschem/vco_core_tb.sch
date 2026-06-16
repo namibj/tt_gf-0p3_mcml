@@ -12,15 +12,15 @@ N 100 -260 140 -260 {lab=0}
 N -600 -460 -500 -460 {lab=#net1}
 N -600 -480 -600 -460 {lab=#net1}
 N 700 -680 700 -420 {lab=#net1}
-N 500 -460 740 -460 {lab=#net2}
+N 580 -460 740 -460 {lab=#net2}
 N -600 -680 700 -680 {lab=#net1}
-N 500 -420 700 -420 {lab=#net1}
+N 620 -420 700 -420 {lab=#net1}
 N 740 -720 740 -460 {lab=#net2}
 N -640 -720 740 -720 {lab=#net2}
 N -640 -720 -640 -420 {lab=#net2}
 N -640 -420 -500 -420 {lab=#net2}
-N -140 -460 140 -460 {lab=#net3}
-N -140 -420 140 -420 {lab=#net4}
+N -60 -460 140 -460 {lab=#net3}
+N -20 -420 140 -420 {lab=#net4}
 N -140 -340 -100 -340 {lab=clk_0}
 N -140 -300 -100 -300 {lab=clk_2}
 N 500 -340 540 -340 {lab=clk_1}
@@ -50,34 +50,34 @@ N -1360 -580 -1260 -580 {lab=0}
 N -1360 -380 -1260 -380 {lab=0}
 N -1260 -380 -1260 -340 {lab=0}
 N -1260 -380 -1220 -380 {lab=0}
-N -1220 -430 -1220 -400 {lab=0}
+N -1220 -430 -1220 -380 {lab=0}
 N -1260 -430 -1220 -430 {lab=0}
 N -1260 -230 -1210 -230 {lab=0}
-N -1210 -230 -1210 -200 {lab=0}
+N -1210 -230 -1210 -180 {lab=0}
 N -1260 -180 -1210 -180 {lab=0}
 N -740 -420 -640 -420 {lab=#net2}
 N -740 -480 -600 -480 {lab=#net1}
 N -600 -680 -600 -480 {lab=#net1}
 N -60 -100 -60 -20 {lab=0}
-N -60 -220 -60 -160 {lab=#net3}
 N 20 -100 20 -20 {lab=0}
 N 20 -220 20 -160 {lab=#net4}
-N -60 -460 -60 -220 {lab=#net3}
+N -60 -460 -60 -160 {lab=#net3}
 N -20 -220 20 -220 {lab=#net4}
 N -20 -420 -20 -220 {lab=#net4}
 N -1360 -400 -1360 -380 {lab=0}
 N -1260 -400 -1260 -380 {lab=0}
-N -1220 -400 -1220 -380 {lab=0}
 N -1260 -200 -1260 -180 {lab=0}
 N -1360 -200 -1360 -180 {lab=0}
-N -1210 -200 -1210 -180 {lab=0}
 N 580 -100 580 -20 {lab=0}
-N 580 -220 580 -160 {lab=#net2}
 N 660 -100 660 -20 {lab=0}
 N 660 -220 660 -160 {lab=#net1}
-N 580 -460 580 -220 {lab=#net2}
+N 580 -460 580 -160 {lab=#net2}
 N 620 -220 660 -220 {lab=#net1}
 N 620 -420 620 -220 {lab=#net1}
+N -140 -460 -60 -460 {lab=#net3}
+N -140 -420 -20 -420 {lab=#net4}
+N 500 -460 580 -460 {lab=#net2}
+N 500 -420 620 -420 {lab=#net1}
 C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval( @value )" value=".include $::180MCU_MODELS/design.ngspice
 .lib $::180MCU_MODELS/sm141064.ngspice typical
 .lib $::180MCU_MODELS/sm141064.ngspice res_typical
@@ -85,38 +85,40 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 
 .option savecurrents
 
-.param vco_fwd_w=12u
-.param vco_pf_S=2
+.param vco_fwd_w=6u
+.param vco_pf_S=1.5
 .param vco_pf_ratio='1/vco_pf_S'
-.param vco_fwd_fingers=3
-.param vco_pf_fingers=3
+.param vco_fwd_fingers=2
+.param vco_pf_fingers=1
+.param vco_tail_fingers=20
+.param vco_takeoff_tail_fingers=10
 .param vco_takeoff_ratio=0.1
-.param vco_takeoff_fingers=2
-.param vco_tail_ratio=5
-.param vco_tail_l=0.5u
+.param vco_takeoff_fingers=1
+.param vco_tail_ratio=50
+.param vco_tail_l=1u
 .param vco_takeoff_tail_ratio=5
-.param vco_takeoff_tail_l=0.5u
+.param vco_takeoff_tail_l=1u
 .param vco_load_w=1u
-.param vco_load_r=5k
+.param vco_load_r=4k
 .param vco_load_l='vco_load_r/1000 * vco_load_w'
 .param vco_takeoff_load_adjust=1
 .param vco_takeoff_load_w=1u
 .param vco_takeoff_load_r='(vco_load_r / vco_takeoff_ratio) * vco_takeoff_load_adjust'
 .param vco_takeoff_load_l='vco_takeoff_load_r/1000 * vco_takeoff_load_w'
 .param vco_takeoff_tail_adjust=1
-.param vco_tail_current=300u
+.param vco_tail_current=512u
 
 .control
 save all
 tran 5p 50n
-*plot v(clk_0) v(clk_1) v(clk_2) v(clk_3)
+plot v(clk_0) v(clk_1) v(clk_2) v(clk_3)
 plot net1 net2 net3 net4 x1.net1
 .endc"}
 C {vco_core_segment.sym} -320 -380 0 0 {name=x1}
 C {symbols/nfet_03v3.sym} -1280 -430 0 0 {name=M1
 L="'vco_tail_l'"
 W="'vco_fwd_w * (1 + vco_pf_ratio) * vco_tail_ratio'"
-nf="'vco_pf_fingers'"
+nf="'vco_tail_fingers'"
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
@@ -131,7 +133,7 @@ C {vco_core_segment.sym} 320 -380 0 0 {name=x2}
 C {symbols/nfet_03v3.sym} -1280 -230 0 0 {name=M2
 L="'vco_takeoff_tail_l'"
 W="'vco_fwd_w * (1 + vco_pf_ratio) * vco_tail_ratio * vco_takeoff_ratio'"
-nf="'vco_fwd_fingers'"
+nf="'vco_takeoff_tail_fingers'"
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"
 pd="'2*int((nf+1)/2) * (W/nf + 0.18u)'"
