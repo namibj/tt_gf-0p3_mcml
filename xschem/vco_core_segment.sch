@@ -8,60 +8,89 @@ V {}
 S {}
 F {}
 E {}
-N -590 -20 -310 -20 {lab=VSS}
-N -740 -100 -330 -100 {lab=#net1}
-N -330 -100 120 -100 {lab=#net1}
+N -740 -110 -740 -100 {lab=#net1}
+N 120 -110 120 -100 {lab=#net1}
 N -330 -100 -330 -80 {lab=#net1}
-N -590 -130 -390 -130 {lab=VSS}
-N -590 -130 -590 -20 {lab=VSS}
-N -50 -130 120 -130 {lab=VSS}
-N -310 -20 -50 -20 {lab=VSS}
-N -50 -130 -50 -20 {lab=VSS}
-N -740 -160 -610 -160 {lab=out_n}
-N -610 -160 -390 -160 {lab=out_n}
-N -270 -160 -30 -160 {lab=out_p}
-N -30 -160 120 -160 {lab=out_p}
-N -780 -590 740 -590 {lab=VSS}
+N -590 -140 -390 -140 {lab=VSS}
+N -590 -140 -590 0 {lab=VSS}
+N -50 -140 120 -140 {lab=VSS}
+N -740 -180 -610 -180 {lab=out_n}
+N -610 -180 -390 -180 {lab=out_n}
+N -270 -180 -30 -180 {lab=out_p}
+N -30 -180 120 -180 {lab=out_p}
+N 380 -630 740 -630 {lab=VDD}
 N 560 -100 740 -100 {lab=#net2}
 N 560 -100 560 -80 {lab=#net2}
-N 580 -20 720 -20 {lab=VSS}
-N 720 -130 720 -20 {lab=VSS}
-N 740 -130.0168316575716 740 -130 {lab=VSS}
-N 720 -130 740 -130 {lab=VSS}
-N 400 -130 400 -20 {lab=VSS}
-N 380 -130 400 -130 {lab=VSS}
+N 580 0 720 0 {lab=VSS}
+N 400 -140 400 0 {lab=VSS}
+N 380 -140 400 -140 {lab=VSS}
 N -330 -50 -310 -50 {lab=VSS}
-N -310 -50 -310 -20 {lab=VSS}
-N -740 -130 -590 -130 {lab=VSS}
-N -780 -20 -590 -20 {lab=VSS}
-N -270 -130 -50 -130 {lab=VSS}
-N 380 -100 560 -100 {lab=#net2}
-N -50 -20 400 -20 {lab=VSS}
+N -310 -50 -310 0 {lab=VSS}
+N -740 -140 -590 -140 {lab=VSS}
+N -270 -140 -50 -140 {lab=VSS}
+N 380 -110 380 -100 {lab=#net2}
+N -50 0 400 0 {lab=VSS}
 N 560 -50 580 -50 {lab=VSS}
-N 580 -50 580 -20 {lab=VSS}
-N 400 -20 580 -20 {lab=VSS}
-N -610 -530 -610 -160 {lab=out_n}
-N -590 -560 -590 -130 {lab=VSS}
-N -30 -530 -30 -160 {lab=out_p}
-N -50 -560 -50 -130 {lab=VSS}
-N 380 -530 380 -160 {lab=takeoff_out_n}
-N 740 -530 740 -160.0168316575716 {lab=takeoff_out_p}
-N 720 -560 720 -130 {lab=VSS}
-N 400 -560 400 -130 {lab=VSS}
-N -650 -200 -610 -200 {lab=out_n}
-N -30 -200 10 -200 {lab=out_p}
-N 300 -200 380 -200 {lab=takeoff_out_n}
+N 580 -50 580 0 {lab=VSS}
+N -650 -220 -610 -220 {lab=out_n}
+N -30 -210 10 -210 {lab=out_p}
+N 300 -210 380 -210 {lab=takeoff_out_n}
 N 740 -200 820 -200 {lab=takeoff_out_p}
-N -610 -500 780 -500 {lab=out_n}
-N 780 -500 780 -130 {lab=out_n}
-N -310 -500 -310 -130 {lab=out_n}
-N -350 -460 -30 -460 {lab=out_p}
-N -350 -460 -350 -130 {lab=out_p}
-N -30 -460 340 -460 {lab=out_p}
-N 340 -460 340 -130 {lab=out_p}
+N -350 -460 -350 -140 {lab=out_p}
+N 340 -460 340 -140 {lab=out_p}
 N 360 -50 520 -50 {lab=takeoff_tail_bias}
 N -410 -50 -370 -50 {lab=tail_bias}
-C {symbols/nfet_03v3.sym} -760 -130 0 0 {name=M1
+N -610 -220 -610 -180 {lab=out_n}
+N -50 -140 -50 0 {lab=VSS}
+N 380 -210 380 -170 {lab=takeoff_out_n}
+N 740 -630 740 -580 {lab=VDD}
+N -610 -630 -610 -580 {lab=VDD}
+N -30 -630 -30 -580 {lab=VDD}
+N 380 -630 380 -580 {lab=VDD}
+N -330 -0 -310 0 {lab=VSS}
+N -390 -100 -330 -100 {lab=#net1}
+N -270 -100 120 -100 {lab=#net1}
+N -310 0 -50 0 {lab=VSS}
+N -780 0 -590 0 {lab=VSS}
+N 380 -100 560 -100 {lab=#net2}
+N -350 -460 -30 -460 {lab=out_p}
+N -30 -460 340 -460 {lab=out_p}
+N 740 -520 740 -200 {lab=takeoff_out_p}
+N -780 -630 -610 -630 {lab=VDD}
+N -610 -630 -30 -630 {lab=VDD}
+N -30 -630 380 -630 {lab=VDD}
+N -30 -460 -30 -210 {lab=out_p}
+N -390 -110 -390 -100 {lab=#net1}
+N -270 -110 -270 -100 {lab=#net1}
+N -740 -180 -740 -170 {lab=out_n}
+N -390 -180 -390 -170 {lab=out_n}
+N -610 -500 -610 -220 {lab=out_n}
+N 380 -520 380 -210 {lab=takeoff_out_n}
+N -50 -550 -50 -140 {lab=VSS}
+N -610 -520 -610 -500 {lab=out_n}
+N -30 -520 -30 -460 {lab=out_p}
+N -740 -100 -390 -100 {lab=#net1}
+N -330 -100 -270 -100 {lab=#net1}
+N -310 -500 780 -500 {lab=out_n}
+N -610 -500 -310 -500 {lab=out_n}
+N -310 -500 -310 -140 {lab=out_n}
+N 740 -120.0168316575716 740 -100 {lab=#net2}
+N 720 -150.0168316575716 740 -150.0168316575716 {lab=VSS}
+N 720 -150.0168316575716 720 0 {lab=VSS}
+N 740 -200 740 -180.0168316575716 {lab=takeoff_out_p}
+N 780 -500 780 -150.0168316575716 {lab=out_n}
+N 720 -550 720 -150.0168316575716 {lab=VSS}
+N -590 -550 -590 -140 {lab=VSS}
+N 400 -550 400 -140 {lab=VSS}
+N -330 -20 -330 -0 {lab=VSS}
+N 560 -20 560 -0 {lab=VSS}
+N 560 -0 580 0 {lab=VSS}
+N -590 0 -330 -0 {lab=VSS}
+N 400 0 560 -0 {lab=VSS}
+N -270 -180 -270 -170 {lab=out_p}
+N 120 -180 120 -170 {lab=out_p}
+N -30 -210 -30 -180 {lab=out_p}
+C {symbols/nfet_03v3.sym} -760 -140 0 0 {name=M1
 L=0.28u
 W="'vco_fwd_w'"
 nf="'vco_fwd_fingers'"
@@ -75,7 +104,7 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {symbols/nfet_03v3.sym} -370 -130 0 1 {name=M3
+C {symbols/nfet_03v3.sym} -370 -140 0 1 {name=M3
 L=0.28u
 W="'vco_fwd_w * vco_pf_ratio'"
 nf="'vco_pf_fingers'"
@@ -89,7 +118,7 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {symbols/nfet_03v3.sym} -290 -130 0 0 {name=M4
+C {symbols/nfet_03v3.sym} -290 -140 0 0 {name=M4
 L=0.28u
 W="'vco_fwd_w * vco_pf_ratio'"
 nf="'vco_pf_fingers'"
@@ -117,8 +146,8 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {ipin.sym} -780 -20 0 0 {name=p1 sig_type=std_logic lab=VSS}
-C {symbols/nfet_03v3.sym} 140 -130 0 1 {name=M2
+C {ipin.sym} -780 0 0 0 {name=p1 sig_type=std_logic lab=VSS}
+C {symbols/nfet_03v3.sym} 140 -140 0 1 {name=M2
 L=0.28u
 W="'vco_fwd_w'"
 nf="'vco_fwd_fingers'"
@@ -132,20 +161,20 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {symbols/ppolyf_u_1k.sym} -610 -560 0 1 {name=R1
+C {symbols/ppolyf_u_1k.sym} -610 -550 0 1 {name=R1
 W="'vco_load_w'"
 L="'vco_load_l'"
 model=ppolyf_u_1k
 spiceprefix=X
 m=1}
-C {symbols/ppolyf_u_1k.sym} -30 -560 0 0 {name=R2
+C {symbols/ppolyf_u_1k.sym} -30 -550 0 0 {name=R2
 W="'vco_load_w'"
 L="'vco_load_l'"
 model=ppolyf_u_1k
 spiceprefix=X
 m=1}
-C {ipin.sym} -780 -590 0 0 {name=p2 sig_type=std_logic lab=VDD}
-C {symbols/nfet_03v3.sym} 360 -130 0 0 {name=M6
+C {ipin.sym} -780 -630 0 0 {name=p2 sig_type=std_logic lab=VDD}
+C {symbols/nfet_03v3.sym} 360 -140 0 0 {name=M6
 L=0.28u
 W="'vco_fwd_w'"
 nf="'vco_fwd_fingers'"
@@ -159,7 +188,7 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {symbols/nfet_03v3.sym} 760 -130.0168316575716 0 1 {name=M7
+C {symbols/nfet_03v3.sym} 760 -150.0168316575716 0 1 {name=M7
 L=0.28u
 W="'vco_fwd_w'"
 nf="'vco_fwd_fingers'"
@@ -187,23 +216,23 @@ sa=0 sb=0 sd=0
 model=nfet_03v3
 spiceprefix=X
 }
-C {symbols/ppolyf_u_1k.sym} 380 -560 0 1 {name=R3
+C {symbols/ppolyf_u_1k.sym} 380 -550 0 1 {name=R3
 W="'vco_takeoff_load_w'"
 L="'vco_takeoff_load_l'"
 model=ppolyf_u_1k
 spiceprefix=X
 m=1}
-C {symbols/ppolyf_u_1k.sym} 740 -560 0 0 {name=R4
+C {symbols/ppolyf_u_1k.sym} 740 -550 0 0 {name=R4
 W="'vco_load_w'"
 L="'vco_load_l'"
 model=ppolyf_u_1k
 spiceprefix=X
 m=1}
-C {opin.sym} -650 -200 0 1 {name=p5 sig_type=std_logic lab=out_n}
-C {opin.sym} 10 -200 0 0 {name=p6 sig_type=std_logic lab=out_p}
-C {ipin.sym} -780 -130 0 0 {name=p3 sig_type=std_logic lab=in_p}
-C {ipin.sym} 160 -130 0 1 {name=p4 sig_type=std_logic lab=in_n}
-C {opin.sym} 300 -200 0 1 {name=p7 sig_type=std_logic lab=takeoff_out_n}
+C {opin.sym} -650 -220 0 1 {name=p5 sig_type=std_logic lab=out_n}
+C {opin.sym} 10 -210 0 0 {name=p6 sig_type=std_logic lab=out_p}
+C {ipin.sym} -780 -140 0 0 {name=p3 sig_type=std_logic lab=in_p}
+C {ipin.sym} 160 -140 0 1 {name=p4 sig_type=std_logic lab=in_n}
+C {opin.sym} 300 -210 0 1 {name=p7 sig_type=std_logic lab=takeoff_out_n}
 C {opin.sym} 820 -200 0 0 {name=p8 sig_type=std_logic lab=takeoff_out_p}
 C {ipin.sym} -410 -50 0 0 {name=p9 sig_type=std_logic lab=tail_bias}
 C {ipin.sym} 360 -50 0 0 {name=p10 sig_type=std_logic lab=takeoff_tail_bias}

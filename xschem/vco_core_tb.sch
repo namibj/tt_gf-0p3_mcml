@@ -33,12 +33,12 @@ N -1260 -480 -1220 -480 {lab=tail_bias}
 N -1300 -480 -1260 -480 {lab=tail_bias}
 N -1300 -480 -1300 -430 {lab=tail_bias}
 N -1260 -480 -1260 -460 {lab=tail_bias}
-N -1260 -200 -1260 -160 {lab=0}
+N -1260 -180 -1260 -140 {lab=0}
 N -1260 -280 -1220 -280 {lab=takeoff_tail_bias}
 N -1300 -280 -1260 -280 {lab=takeoff_tail_bias}
 N -1300 -280 -1300 -230 {lab=takeoff_tail_bias}
 N -1260 -280 -1260 -260 {lab=takeoff_tail_bias}
-N -1360 -200 -1260 -200 {lab=0}
+N -1360 -180 -1260 -180 {lab=0}
 N -1360 -280 -1300 -280 {lab=takeoff_tail_bias}
 N -1360 -280 -1360 -260 {lab=takeoff_tail_bias}
 N -1360 -480 -1300 -480 {lab=tail_bias}
@@ -47,14 +47,14 @@ N -1260 -580 -1260 -540 {lab=0}
 N -1360 -660 -1220 -660 {lab=VDD}
 N -1360 -660 -1360 -640 {lab=VDD}
 N -1360 -580 -1260 -580 {lab=0}
-N -1360 -400 -1260 -400 {lab=0}
-N -1260 -400 -1260 -360 {lab=0}
-N -1260 -400 -1220 -400 {lab=0}
+N -1360 -380 -1260 -380 {lab=0}
+N -1260 -380 -1260 -340 {lab=0}
+N -1260 -380 -1220 -380 {lab=0}
 N -1220 -430 -1220 -400 {lab=0}
 N -1260 -430 -1220 -430 {lab=0}
 N -1260 -230 -1210 -230 {lab=0}
 N -1210 -230 -1210 -200 {lab=0}
-N -1260 -200 -1210 -200 {lab=0}
+N -1260 -180 -1210 -180 {lab=0}
 N -740 -420 -640 -420 {lab=#net2}
 N -740 -480 -600 -480 {lab=#net1}
 N -600 -680 -600 -480 {lab=#net1}
@@ -65,6 +65,19 @@ N 20 -220 20 -160 {lab=#net4}
 N -60 -460 -60 -220 {lab=#net3}
 N -20 -220 20 -220 {lab=#net4}
 N -20 -420 -20 -220 {lab=#net4}
+N -1360 -400 -1360 -380 {lab=0}
+N -1260 -400 -1260 -380 {lab=0}
+N -1220 -400 -1220 -380 {lab=0}
+N -1260 -200 -1260 -180 {lab=0}
+N -1360 -200 -1360 -180 {lab=0}
+N -1210 -200 -1210 -180 {lab=0}
+N 580 -100 580 -20 {lab=0}
+N 580 -220 580 -160 {lab=#net2}
+N 660 -100 660 -20 {lab=0}
+N 660 -220 660 -160 {lab=#net1}
+N 580 -460 580 -220 {lab=#net2}
+N 620 -220 660 -220 {lab=#net1}
+N 620 -420 620 -220 {lab=#net1}
 C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval( @value )" value=".include $::180MCU_MODELS/design.ngspice
 .lib $::180MCU_MODELS/sm141064.ngspice typical
 .lib $::180MCU_MODELS/sm141064.ngspice res_typical
@@ -73,30 +86,31 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 .option savecurrents
 
 .param vco_fwd_w=12u
-.param vco_pf_S=1
+.param vco_pf_S=2
 .param vco_pf_ratio='1/vco_pf_S'
 .param vco_fwd_fingers=3
 .param vco_pf_fingers=3
-.param vco_takeoff_ratio=1
-.param vco_takeoff_fingers=6
+.param vco_takeoff_ratio=0.1
+.param vco_takeoff_fingers=2
 .param vco_tail_ratio=5
 .param vco_tail_l=0.5u
 .param vco_takeoff_tail_ratio=5
 .param vco_takeoff_tail_l=0.5u
 .param vco_load_w=1u
-.param vco_load_r=13k
+.param vco_load_r=5k
 .param vco_load_l='vco_load_r/1000 * vco_load_w'
 .param vco_takeoff_load_adjust=1
 .param vco_takeoff_load_w=1u
 .param vco_takeoff_load_r='(vco_load_r / vco_takeoff_ratio) * vco_takeoff_load_adjust'
 .param vco_takeoff_load_l='vco_takeoff_load_r/1000 * vco_takeoff_load_w'
 .param vco_takeoff_tail_adjust=1
-.param vco_tail_current=192u
+.param vco_tail_current=300u
 
 .control
 save all
-tran 50p 5000n
-plot v(clk_0) v(clk_1) v(clk_2) v(clk_3)
+tran 5p 50n
+*plot v(clk_0) v(clk_1) v(clk_2) v(clk_3)
+plot net1 net2 net3 net4 x1.net1
 .endc"}
 C {vco_core_segment.sym} -320 -380 0 0 {name=x1}
 C {symbols/nfet_03v3.sym} -1280 -430 0 0 {name=M1
@@ -144,21 +158,33 @@ C {vsource.sym} -1360 -610 0 1 {name=V1 value=3.3 savecurrent=false}
 C {isource.sym} -1360 -430 2 0 {name=I0 value="'vco_tail_current'"}
 C {isource.sym} -1360 -230 2 0 {name=I1 value="'vco_tail_current * vco_takeoff_ratio * vco_takeoff_tail_adjust'"}
 C {lab_wire.sym} -1220 -660 0 1 {name=p18 sig_type=std_logic lab=VDD}
-C {isource.sym} -740 -450 0 0 {name=I2 value="PULSE(0 50u 1n 20p 20p 80p 0 1)"}
+C {isource.sym} -740 -450 0 0 {name=I2 value="PULSE(0 5u 1n 20p 20p 80p 0 1)"}
 C {res.sym} -60 -130 0 0 {name=R1
-value=1M
+value=1G
 footprint=1206
 device=resistor
 m=1}
 C {gnd.sym} -60 -20 0 0 {name=l2 lab=0}
 C {res.sym} 20 -130 0 0 {name=R2
-value=1M
+value=1G
 footprint=1206
 device=resistor
 m=1}
 C {gnd.sym} 20 -20 0 0 {name=l3 lab=0}
 C {gnd.sym} -1260 -540 0 0 {name=l1 lab=0}
-C {gnd.sym} -1260 -360 0 0 {name=l4 lab=0}
-C {gnd.sym} -1260 -160 0 0 {name=l5 lab=0}
+C {gnd.sym} -1260 -340 0 0 {name=l4 lab=0}
+C {gnd.sym} -1260 -140 0 0 {name=l5 lab=0}
 C {gnd.sym} -540 -260 0 0 {name=l6 lab=0}
 C {gnd.sym} 100 -260 0 0 {name=l7 lab=0}
+C {res.sym} 580 -130 0 0 {name=R3
+value=1G
+footprint=1206
+device=resistor
+m=1}
+C {gnd.sym} 580 -20 0 0 {name=l8 lab=0}
+C {res.sym} 660 -130 0 0 {name=R4
+value=1G
+footprint=1206
+device=resistor
+m=1}
+C {gnd.sym} 660 -20 0 0 {name=l9 lab=0}
