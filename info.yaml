@@ -55,12 +55,12 @@ pinout:
   uio[7]: ""
 
   # Analog pins - make sure to also set "analog_pins" above, else the pins won't be connected
-  ua[0]: ""
-  ua[1]: ""
-  ua[2]: ""
-  ua[3]: ""
-  ua[4]: ""
-  ua[5]: ""
+  ua[0]: "vco_takeoff_tail_bias"
+  ua[1]: "vco_tail_bias"
+  ua[2]: "clk_0_p"
+  ua[3]: "clk_0_n"
+  ua[4]: "clk_1_p"
+  ua[5]: "clk_1_n"
 
 # Do not change!
 yaml_version: 6
