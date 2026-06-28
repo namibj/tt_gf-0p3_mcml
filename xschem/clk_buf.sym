@@ -19,6 +19,7 @@ B 5 177.5 -82.5 182.5 -77.5 {name=out_p sig_type=std_logic dir=out name=p6 }
 B 5 -182.5 -82.5 -177.5 -77.5 {name=in_p sig_type=std_logic dir=in name=p3 }
 B 5 -182.5 -42.5 -177.5 -37.5 {name=in_n sig_type=std_logic dir=in name=p4 }
 B 5 -182.5 37.5 -177.5 42.5 {name=tail_bias sig_type=std_logic dir=in name=p9 }
+B 5 -182.5 77.5 -177.5 82.5 {name=neg_tail_bias sig_type=std_logic dir=in name=p15}
 T {@symname} -35 -10 0 0 0.2 0.2 {}
 T {@name} -5 -40 0 0 0.2 0.2 {}
 T {VSS} -170 116 0 0 0.2 0.2 {}
@@ -28,3 +29,4 @@ T {out_p} 170 -84 0 1 0.2 0.2 {}
 T {in_p} -170 -84 0 0 0.2 0.2 {}
 T {in_n} -170 -44 0 0 0.2 0.2 {}
 T {tail_bias} -170 36 0 0 0.2 0.2 {}
+T {neg_tail_bias} -170 76 0 0 0.2 0.2 {}
