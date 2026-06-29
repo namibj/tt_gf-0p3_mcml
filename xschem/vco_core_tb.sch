@@ -150,6 +150,12 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 .param vco_takeoff_tail_adjust=1
 .param vco_tail_current=32u
 
+.param vco_load_pfet_code='1'
+.param vco_load_pfet_bit_0='vco_load_pfet_code % 2'
+.param vco_load_pfet_bit_1='int(vco_load_pfet_code / 2) % 2'
+.param vco_load_pfet_bit_2='int(vco_load_pfet_code / 4) % 2'
+.param vco_load_pfet_bit_3='int(vco_load_pfet_code / 8) % 2'
+.param vco_load_pfet_bit_4='int(vco_load_pfet_code / 16) % 2'
 
 *.print \{vco_load_pfet_w * (vco_load_pfet_scale_base**4)\}
 * PSS analysis unavailable in the normally distributed/available ngspice version/build, at least for now, so don't use it!
@@ -163,7 +169,16 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 *Xyce-only:
 .TRAN 100p 100n
 .MEASURE TRAN output_freq FREQ V(clk_0, clk_2) TD=20n
-.PRINT TRAN FORMAT=raw file=vco_core_tb.raw v(*) i(*)
+.MEASURE TRAN vco_load_pfet_code EQN\{vco_load_pfet_code\}
+.MEASURE TRAN vco_tail_current EQN\{vco_tail_current\}
+*.PRINT TRAN FORMAT=raw file=vco_core_tb.raw v(*) i(*)
+
+* First we test a very condensed run, before we put the effort in for the full large one.
+.STEP OCT vco_tail_current 64u 256u 3
+.STEP vco_load_pfet_code 1 10 3
+
+*.STEP OCT vco_tail_current 1u 1024u 3
+*.STEP vco_load_pfet_code 1 31 1
 
 **.control
 **save all
