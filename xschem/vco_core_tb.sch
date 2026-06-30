@@ -167,18 +167,18 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 
 
 *Xyce-only:
-.TRAN 100p 100n
+.TRAN 100p 50n
 .MEASURE TRAN output_freq FREQ V(clk_0, clk_2) TD=20n
 .MEASURE TRAN vco_load_pfet_code EQN\{vco_load_pfet_code\}
 .MEASURE TRAN vco_tail_current EQN\{vco_tail_current\}
 *.PRINT TRAN FORMAT=raw file=vco_core_tb.raw v(*) i(*)
 
 * First we test a very condensed run, before we put the effort in for the full large one.
-.STEP OCT vco_tail_current 64u 256u 3
-.STEP vco_load_pfet_code 1 10 3
+*.STEP OCT vco_tail_current 64u 256u 3
+*.STEP vco_load_pfet_code 1 10 3
 
-*.STEP OCT vco_tail_current 1u 1024u 3
-*.STEP vco_load_pfet_code 1 31 1
+.STEP OCT vco_tail_current 4u 1024u 3
+.STEP vco_load_pfet_code 1 31 1
 
 **.control
 **save all
