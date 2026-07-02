@@ -564,11 +564,16 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 *Xyce-only:
 .TRAN 100p 50n
 .MEASURE TRAN output_freq FREQ V(clk_0, clk_2) TD=20n
-*.MEASURE TRAN vco_load_pfet_code EQN\{vco_load_pfet_code\}
+.RESULT \{output_freq\}
+.MEASURE TRAN vco_load_pfet_code EQN\{vco_load_pfet_code\}
+.RESULT \{vco_load_pfet_code\}
 *.MEASURE TRAN vco_tail_current EQN\{vco_tail_current\}
+.MEASURE TRAN latch_tail_current EQN\{latch_tail_current\}
+.RESULT \{latch_tail_current\}
 .PRINT TRAN FORMAT=raw file=c4_type_8_to_1_tb.raw v(*) i(*)
 
-.MEASURE TRAN mux2_clk_is_ddr FREQ V(mux2_clk_p, mux2_clk_n) TD=20n
+.MEASURE TRAN mux2_clk_freq_is_ddr FREQ V(mux2_clk_p, mux2_clk_n) TD=20n
+.RESULT \{mux2_clk_freq_is_ddr\}
 
 * First we test a very condensed run, before we put the effort in for the full large one.
 *.STEP OCT vco_tail_current 64u 256u 3
@@ -576,6 +581,13 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 
 *.STEP OCT vco_tail_current 4u 1024u 3
 *.STEP vco_load_pfet_code 1 31 1
+
+* Let's sweep codes for coarse frequency and latch current
+* for maybe finding how fast this particular latch config
+* (with the inline buffers) can divide
+.STEP OCT latch_tail_current 64u 256u 1
+.STEP vco_load_pfet_code 0 18 1
+
 
 **.control
 **save all
