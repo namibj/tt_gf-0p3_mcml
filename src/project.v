@@ -20,4 +20,8 @@ module tt_um_mcml_vco (
     input  wire       rst_n     // reset_n - low to reset
 );
 
+    assign uo_out  = 8'h00;
+    assign uio_out = 8'h00;
+    assign uio_oe  = 8'h00;
+
 endmodule

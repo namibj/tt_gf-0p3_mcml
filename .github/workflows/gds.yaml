@@ -9,23 +9,81 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: recursive
 
       - name: Read top module name
         id: top_module
         run: |
-          echo TOP_MODULE=`yq '.project.top_module' info.yaml` | tee $GITHUB_OUTPUT
+          echo "TOP_MODULE=$(yq '.project.top_module' info.yaml)" | tee "$GITHUB_OUTPUT"
 
-      - name: Create and publish the GDS artifact
+
+      - name: Build custom-GDS Verilog model
+        run: |
+          python3 tools/build_custom_gds_verilog.py --out build/custom_gds/project.v
+          grep -Eq '^ *`include +' build/custom_gds/project.v && echo "BAD: include remains" && exit 1 || echo "OK: no active includes"
+          wc -l build/custom_gds/project.v
+          grep -n "module ${{ steps.top_module.outputs.TOP_MODULE }}" build/custom_gds/project.v
+
+      - name: Check custom analog submission files
+        run: |
+          TOP="${{ steps.top_module.outputs.TOP_MODULE }}"
+
+          # PROJECT="project.v"
+
+
+          echo "TOP_MODULE=${TOP}"
+          echo "Expected custom GDS: gds/${TOP}.gds"
+          echo "Expected custom LEF: lef/${TOP}.lef"
+          echo "Expected generated Verilog model: build/custom_gds/project.v"
+
+          test -f "gds/${TOP}.gds"
+          test -f "lef/${TOP}.lef"
+          test -f "build/custom_gds/project.v"
+
+          python3 tools/generate_submission_gds.py \
+            --top "${TOP}" \
+            --source-gds "gds/${TOP}.gds" \
+            --source-lef "lef/${TOP}.lef" \
+            --out-gds "build/custom_gds/gds/${TOP}.gds" \
+            --out-lef "build/custom_gds/lef/${TOP}.lef"
+
+          cat "build/custom_gds/project.v"
+
+          python3 tools/check_gds_content.py "build/custom_gds/gds/${TOP}.gds"
+
+      - name: Create and publish the custom GDS artifact
         uses: TinyTapeout/tt-gds-action/custom_gds@ttgf26a
         with:
           top_module: ${{ steps.top_module.outputs.TOP_MODULE }}
-          gds_path: gds/${{ steps.top_module.outputs.TOP_MODULE }}.gds
-          lef_path: lef/${{ steps.top_module.outputs.TOP_MODULE }}.lef
-          verilog_path: src/project.v
+          gds_path: build/custom_gds/gds/${{ steps.top_module.outputs.TOP_MODULE }}.gds
+          lef_path: build/custom_gds/lef/${{ steps.top_module.outputs.TOP_MODULE }}.lef
+          verilog_path: build/custom_gds/project.v
           pdk: gf180mcuD
+
+      - name: Add PDK metadata for gl_test
+        run: |
+          # JSON replacements....
+          jq \
+            --arg pdk_source "ciel" \
+            --arg pdk_version "e8daeda73ca8f5814dbc0b11d1d05802251a3750" \
+            ". + {\"PDK_SOURCE\": \$pdk_source, \"PDK_VERSION\": \$pdk_version}" \
+            tt_submission/pdk.json > tt_submission/pdk.json.tmp
+          echo "tt_submission/pdk.json peek:"
+          mv tt_submission/pdk.json.tmp tt_submission/pdk.json
+          cat tt_submission/pdk.json
+
+      - name: Re-publish tt_submission artifact for gl_test
+        uses: actions/upload-artifact@v7
+        with:
+          name: tt_submission
+          overwrite: true
+          path: |
+            info.yaml
+            LICENSE
+            docs/*
+            tt_submission/*
 
   precheck:
     needs: gds
@@ -33,6 +91,18 @@ jobs:
     steps:
       - name: Run Tiny Tapeout Precheck
         uses: TinyTapeout/tt-gds-action/precheck@ttgf26a
+
+  gl_test:
+    needs: gds
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v6
+        with:
+          submodules: recursive
+
+      - name: GL test
+        uses: TinyTapeout/tt-gds-action/gl_test@ttgf26a
 
   viewer:
     needs: gds
