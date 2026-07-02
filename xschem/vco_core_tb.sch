@@ -6,15 +6,15 @@ S {}
 F {}
 E {}
 B 2 -1500 40 760 660 {flags=graph
-y1=-0.41849462
-y2=0.32344086
+y1=0.958
+y2=5.028
 ypos1=0
 ypos2=2
 divy=5
 subdivy=1
 unity=1
-x1=0
-x2=1e-07
+x1=2.5e-09
+x2=5.25e-08
 divx=5
 subdivx=1
 xlabmag=1.0
@@ -141,16 +141,16 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 .param vco_load_r=4k
 .param vco_load_l='vco_load_r/1000 * vco_load_w'
 .param vco_load_pfet_w=0.22u
-.param vco_load_pfet_l=1u
-.param vco_load_pfet_scale_base=1.5
+.param vco_load_pfet_l=0.7u
+.param vco_load_pfet_scale_base=2.0
 .param vco_takeoff_load_adjust=1
 .param vco_takeoff_load_w=1u
 .param vco_takeoff_load_r='(vco_load_r / vco_takeoff_ratio) * vco_takeoff_load_adjust'
 .param vco_takeoff_load_l='vco_takeoff_load_r/1000 * vco_takeoff_load_w'
 .param vco_takeoff_tail_adjust=1
-.param vco_tail_current=32u
+.param vco_tail_current=128u
 
-.param vco_load_pfet_code='1'
+.param vco_load_pfet_code='30'
 .param vco_load_pfet_bit_0='vco_load_pfet_code % 2'
 .param vco_load_pfet_bit_1='int(vco_load_pfet_code / 2) % 2'
 .param vco_load_pfet_bit_2='int(vco_load_pfet_code / 4) % 2'

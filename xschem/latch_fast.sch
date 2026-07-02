@@ -118,7 +118,7 @@ spiceprefix=X
 }
 C {symbols/nfet_03v3.sym} -350 130 0 0 {name=M5
 L="'latch_tail_l'"
-W="'latch_fwd_w * (1 + latch_pf_ratio) * latch_tail_ratio'"
+W="\{latch_fwd_w * (1 + latch_pf_ratio) * latch_tail_ratio\}"
 nf="'latch_tail_fingers'"
 m=1
 ad="'int((nf+1)/2) * W/nf * 0.18u'"

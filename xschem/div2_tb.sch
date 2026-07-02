@@ -83,7 +83,7 @@ C {code_shown.sym} 805 -745 0 0 {name=NGSPICE only_toplevel=true format="tcleval
 .param latch_tail_fingers=20
 .param latch_clk_ratio=0.5
 .param latch_clk_fingers=1
-.param latch_tail_ratio=50
+.param latch_tail_ratio=10
 .param latch_tail_l=1u
 .param latch_load_w=1u
 .param latch_load_r=12k
